@@ -35,6 +35,16 @@ function showRouteOptions(routes){
         console.log(`Route ${index+1}: ${route.legs[0].distance.text}`); 
     });
 }
+
+function getMidPoints(route){
+    const points = route.overview_path;
+    return [
+        points[0],
+        points[Math.floor(points.length / 2)],
+        points[points.length - 1]
+    ];
+}
+
 window.onload = initMap;
 
 
