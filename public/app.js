@@ -12,5 +12,29 @@ function initMap() {
     new google.maps.places.Autocomplete(document.getElementById("end"));
 }
 
+
+function calculateRoute(){
+    const start = document.getElementById("start").value;
+    const end = document.getElementById("end").value;
+
+    directionService.route({
+        origin: start,
+        destination: end,
+        travelaMode: "DRIVING",
+        provideRouteAlternatives: true
+   },(result, status) => {
+    if(status == "OK"){
+        directionRenderer.setDirections(result);
+        showRouteOptions(result.routes);
+    }
+   });
+}
+
+function showRouteOptions(routes){
+    routes.forEach((route, index) => {
+        console.log(`Route ${index+1}: ${route.legs[0].distance.text}`); 
+    });
+}
 window.onload = initMap;
+
 
